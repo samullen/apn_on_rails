@@ -209,10 +209,9 @@ describe APN::App do
   end
   
   describe 'cert for production environment' do 
-    
     it 'should return the production cert for the app' do 
       app = AppFactory.create
-      RAILS_ENV = 'production'
+      Rails = OpenStruct.new(:env => "production")
       app.cert.should == app.apn_prod_cert
     end
     
@@ -222,7 +221,7 @@ describe APN::App do
     
     it 'should return the development cert for the app' do 
       app = AppFactory.create
-      RAILS_ENV = 'staging'
+      Rails = OpenStruct.new(:env => "staging")
       app.cert.should == app.apn_dev_cert
     end
   end
