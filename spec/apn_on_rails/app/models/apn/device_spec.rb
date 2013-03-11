@@ -5,8 +5,8 @@ describe APN::Device do
   describe 'token' do
     
     it 'should be unique' do
-      t = APN::Device.first.token
-      device = DeviceFactory.new(:token => t)
+      d = APN::Device.first
+      device = DeviceFactory.new(:token => d.token, :app_id => d.app_id )
       device.should_not be_valid
       device.errors['token'].should include('has already been taken')
       
