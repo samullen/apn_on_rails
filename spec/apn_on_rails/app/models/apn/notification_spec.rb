@@ -40,7 +40,6 @@ describe APN::Notification do
       noty.to_apple_json.should match(/"sound":"my_sound\.aiff"/)
       noty.to_apple_json.should match(/"alert":"Hello!"/)
       noty.to_apple_json.should match(/"aps":{.+}/)
-#       noty.to_apple_json.should == %{{"typ":"1","aps":{"badge":5,"sound":"my_sound.aiff","alert":"Hello!"}}}
     end
     
   end
@@ -55,7 +54,7 @@ describe APN::Notification do
     end
     
     it 'should raise an APN::Errors::ExceededMessageSizeError if the message is too big' do
-      noty = NotificationFactory.new(:device_id => DeviceFactory.create, :sound => true, :badge => nil)
+      noty = NotificationFactory.new(:device => DeviceFactory.create, :sound => true, :badge => nil)
       noty.send(:write_attribute, 'alert', 'a' * 183)
       lambda {
         noty.message_for_sending
