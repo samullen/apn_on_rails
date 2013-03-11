@@ -35,7 +35,11 @@ describe APN::GroupNotification do
     
     it 'should return the necessary JSON for Apple' do
       noty = APN::GroupNotification.first
-      noty.to_apple_json.should == %{{"typ":"1","aps":{"badge":5,"sound":"my_sound.aiff","alert":"Hello!"}}}
+      noty.to_apple_json.should match(/"typ":"1"/)
+      noty.to_apple_json.should match(/"badge":5/)
+      noty.to_apple_json.should match(/"sound":"my_sound\.aiff"/)
+      noty.to_apple_json.should match(/"alert":"Hello!"/)
+      noty.to_apple_json.should match(/"aps":{.+}/)
     end
     
   end
